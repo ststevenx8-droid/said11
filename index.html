@@ -1,3 +1,6 @@
+নিচের সংশোধিত কোড থেকে এডমিন প্যানেল (Admin Panel) ভিউ, সাইডবার বাটন এবং এর সাথে
+সম্পর্কিত সমস্ত স্ক্রিপ্ট ও লিসেনার সম্পূর্ণরূপে সরিয়ে দেওয়া হয়েছে:
+
 <!DOCTYPE html>
 <html lang="en" class="light">
 <head>
@@ -238,13 +241,6 @@
         </button>
         <button id="nav-account" onclick="switchTab('account')" class="nav-btn w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-medium transition-all text-slate-400 hover:text-white hover:bg-slate-800/50">
           <i class="fa-regular fa-user text-lg w-5 text-center"></i> My Account
-        </button>
-        <!-- Dynamic Admin Panel Button -->
-        <button id="nav-admin" onclick="switchTab('admin')" class="nav-btn w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl text-sm font-medium transition-all text-slate-400 hover:text-white hover:bg-slate-800/50">
-          <span class="flex items-center gap-3">
-            <i class="fa-solid fa-user-shield text-lg w-5 text-center"></i> Admin Panel
-          </span>
-          <span class="bg-rose-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold" id="admin-pending-badge">0</span>
         </button>
         <button onclick="handleLogout()" class="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-medium transition-all text-rose-400 hover:text-rose-300 hover:bg-rose-950/20">
           <i class="fa-solid fa-arrow-right-from-bracket text-lg w-5 text-center"></i> Log Out
@@ -834,65 +830,6 @@
           </div>
         </div>
 
-        <!-- VIEW: ADMIN PANEL (Real-time Deposit & Order Manager) -->
-        <div id="view-admin" class="hidden space-y-6">
-          <div>
-            <h2 class="text-xl md:text-2xl font-black tracking-tight flex items-center gap-2"><i class="fa-solid fa-user-shield text-blue-500"></i> Admin Panel</h2>
-            <p class="text-xs text-slate-400 mt-1">পেন্ডিং ডিপোজিট অনুমোদন এবং অর্ডার স্ট্যাটাস পরিবর্তন করুন।</p>
-          </div>
-
-          <!-- Pending Deposits Section -->
-          <div class="bg-white dark:bg-[#0E1527]/90 rounded-3xl border border-slate-150 dark:border-slate-800/40 shadow-sm overflow-hidden backdrop-blur-md">
-            <div class="p-5 border-b border-slate-150 dark:border-slate-800/40 flex items-center justify-between">
-              <span class="text-xs bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 px-3 py-1.5 rounded-full font-bold uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-clock"></i> Pending Deposits Approve</span>
-            </div>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left border-collapse text-xs">
-                <thead>
-                  <tr class="bg-slate-50 dark:bg-slate-900/40 text-slate-400 uppercase font-bold border-b border-slate-150 dark:border-slate-800/40">
-                    <th class="py-3 px-4">User</th>
-                    <th class="py-3 px-4">TxID</th>
-                    <th class="py-3 px-4">Sender Number</th>
-                    <th class="py-3 px-4">Amount</th>
-                    <th class="py-3 px-4 text-center">Action</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-pending-deposits-body" class="divide-y divide-slate-100 dark:divide-slate-800/40">
-                  <tr>
-                    <td colspan="5" class="py-6 text-center text-slate-400 font-medium">No pending deposit requests.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- Pending Orders Section -->
-          <div class="bg-white dark:bg-[#0E1527]/90 rounded-3xl border border-slate-150 dark:border-slate-800/40 shadow-sm overflow-hidden backdrop-blur-md">
-            <div class="p-5 border-b border-slate-150 dark:border-slate-800/40 flex items-center justify-between">
-              <span class="text-xs bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 px-3 py-1.5 rounded-full font-bold uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-basket-shopping"></i> Pending Orders Management</span>
-            </div>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left border-collapse text-xs">
-                <thead>
-                  <tr class="bg-slate-50 dark:bg-slate-900/40 text-slate-400 uppercase font-bold border-b border-slate-150 dark:border-slate-800/40">
-                    <th class="py-3 px-4">Order ID</th>
-                    <th class="py-3 px-4">User</th>
-                    <th class="py-3 px-4">Service</th>
-                    <th class="py-3 px-4">Link</th>
-                    <th class="py-3 px-4">Qty</th>
-                    <th class="py-3 px-4 text-center">Action</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-pending-orders-body" class="divide-y divide-slate-100 dark:divide-slate-800/40">
-                  <tr>
-                    <td colspan="6" class="py-6 text-center text-slate-400 font-medium">No pending orders.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
       </main>
 
     </div>
@@ -982,19 +919,6 @@
     const db = firebase.database();
     const auth = firebase.auth();
 
-    // ================== SERVICES DATABASE ==================
-    const services = [
-      { id: 30447, category: 'Telegram', name: 'Auto Telegram Post View | instant | Non Drop | Future 200 Post', icon: 'fa-telegram text-blue-400', rate: 150.00, min: 100, max: 50000 },
-      { id: 4521, category: 'Telegram', name: 'Telegram Channel Members | Non Drop | High Quality', icon: 'fa-telegram text-blue-400', rate: 208.00, min: 10, max: 100000 },
-      { id: 4522, category: 'Telegram', name: 'Telegram Post Views | Super Instant & Fast', icon: 'fa-telegram text-blue-400', rate: 150.00, min: 100, max: 500000 },
-      { id: 4523, category: 'Telegram', name: 'Telegram Post Reactions | Positive Custom Mix', icon: 'fa-telegram text-blue-400', rate: 84.50, min: 50, max: 100000 },
-      { id: 4525, category: 'Instagram', name: 'Instagram Followers | 100% Real & Active', icon: 'fa-instagram text-pink-500', rate: 273.00, min: 10, max: 100000 },
-      { id: 4526, category: 'YouTube', name: 'YouTube Subscribers | Non Drop Guaranteed', icon: 'fa-youtube text-red-500', rate: 364.00, min: 10, max: 500000 },
-      { id: 4530, category: 'TikTok', name: 'TikTok Video Views | Instant Start | High Retention', icon: 'fa-tiktok text-[#25F4EE]', rate: 15.00, min: 500, max: 1000000 },
-      { id: 4531, category: 'TikTok', name: 'TikTok Real Followers | Safe Organic Growth', icon: 'fa-tiktok text-[#25F4EE]', rate: 312.00, min: 10, max: 50000 },
-      { id: 4532, category: 'TikTok', name: 'TikTok Video Likes | Stable & Super Fast', icon: 'fa-tiktok text-[#25F4EE]', rate: 195.00, min: 25, max: 200000 }
-    ];
-
     // ================== STATE VARIABLE PREPARATION ==================
     let walletState = {
       balance: 0.00,
@@ -1063,6 +987,7 @@
       container.innerHTML = '';
 
       const top20 = leaderboard.slice(0, 20);
+
       top20.forEach((user, index) => {
         const row = document.createElement('div');
         row.className = `flex items-center justify-between p-2 rounded-xl border transition-all ${user.isMe ? 'bg-blue-500/10 border-blue-500/30 ring-2 ring-blue-500/20' : 'bg-slate-50/50 dark:bg-slate-900/40 border-slate-100 dark:border-slate-800/40'}`;
@@ -1175,7 +1100,7 @@
     }
 
     // SPA Tabs controller
-    const activeViews = ['dashboard', 'orders', 'add-funds', 'tickets', 'account', 'referrals', 'admin'];
+    const activeViews = ['dashboard', 'orders', 'add-funds', 'tickets', 'account', 'referrals'];
     function switchTab(viewId) {
       activeViews.forEach(v => {
         const el = document.getElementById(`view-${v}`);
@@ -1490,95 +1415,6 @@
             `;
             ticketContainer.appendChild(row);
           });
-        });
-
-        // ================== REAL-TIME ADMIN PANEL LISTENERS ==================
-        // Listen to all deposits globally for approvals
-        db.ref('deposits').on('value', (snapshot) => {
-          const adminDepBody = document.getElementById('admin-pending-deposits-body');
-          adminDepBody.innerHTML = '';
-          const deposits = snapshot.val();
-          let pendingCount = 0;
-
-          if (!deposits) {
-            adminDepBody.innerHTML = `
-              <tr>
-                <td colspan="5" class="py-6 text-center text-slate-400 font-medium">No pending deposit requests.</td>
-              </tr>`;
-            document.getElementById('admin-pending-badge').innerText = '0';
-            return;
-          }
-
-          Object.values(deposits).forEach(dep => {
-            if (dep.status === 'Pending') {
-              pendingCount++;
-              const row = document.createElement('tr');
-              row.className = "hover:bg-slate-50 dark:hover:bg-slate-800/20";
-              row.innerHTML = `
-                <td class="py-4 px-4 font-bold">@${dep.username}</td>
-                <td class="py-4 px-4 font-mono font-semibold text-slate-500">${dep.txId}</td>
-                <td class="py-4 px-4">${dep.senderNum}</td>
-                <td class="py-4 px-4 font-bold text-slate-700 dark:text-slate-300">৳${dep.amount.toFixed(2)}</td>
-                <td class="py-4 px-4 text-center space-x-2">
-                  <button onclick="approveDeposit('${dep.txId}', '${dep.uid}', ${dep.amount})" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-1 px-3 rounded-lg text-[10px] transition-all">Approve</button>
-                  <button onclick="rejectDeposit('${dep.txId}', '${dep.uid}')" class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-1 px-3 rounded-lg text-[10px] transition-all">Reject</button>
-                </td>
-              `;
-              adminDepBody.appendChild(row);
-            }
-          });
-
-          if (pendingCount === 0) {
-            adminDepBody.innerHTML = `
-              <tr>
-                <td colspan="5" class="py-6 text-center text-slate-400 font-medium">No pending deposit requests.</td>
-              </tr>`;
-          }
-          document.getElementById('admin-pending-badge').innerText = pendingCount.toString();
-        });
-
-        // Listen to all orders globally for complete/process/cancel updates
-        db.ref('orders').on('value', (snapshot) => {
-          const adminOrderBody = document.getElementById('admin-pending-orders-body');
-          adminOrderBody.innerHTML = '';
-          const orders = snapshot.val();
-          let pendingCount = 0;
-
-          if (!orders) {
-            adminOrderBody.innerHTML = `
-              <tr>
-                <td colspan="6" class="py-6 text-center text-slate-400 font-medium">No pending orders.</td>
-              </tr>`;
-            return;
-          }
-
-          Object.values(orders).forEach(order => {
-            if (order.status === 'Pending') {
-              pendingCount++;
-              const row = document.createElement('tr');
-              row.className = "hover:bg-slate-50 dark:hover:bg-slate-800/20";
-              row.innerHTML = `
-                <td class="py-4 px-4 font-bold">#${order.orderId}</td>
-                <td class="py-4 px-4">@${order.username}</td>
-                <td class="py-4 px-4 font-semibold text-slate-700 dark:text-slate-300 truncate max-w-xs">${order.serviceName}</td>
-                <td class="py-4 px-4 text-blue-500 truncate max-w-xs">${order.link}</td>
-                <td class="py-4 px-4 font-medium">${order.quantity.toLocaleString()}</td>
-                <td class="py-4 px-4 text-center space-x-2">
-                  <button onclick="updateOrderStatus('${order.orderId}', '${order.uid}', 'Completed')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-1 px-2.5 rounded-lg text-[10px] transition-all">Complete</button>
-                  <button onclick="updateOrderStatus('${order.orderId}', '${order.uid}', 'Processing')" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2.5 rounded-lg text-[10px] transition-all">Process</button>
-                  <button onclick="updateOrderStatus('${order.orderId}', '${order.uid}', 'Canceled')" class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-1 px-2.5 rounded-lg text-[10px] transition-all">Cancel</button>
-                </td>
-              `;
-              adminOrderBody.appendChild(row);
-            }
-          });
-
-          if (pendingCount === 0) {
-            adminOrderBody.innerHTML = `
-              <tr>
-                <td colspan="6" class="py-6 text-center text-slate-400 font-medium">No pending orders.</td>
-              </tr>`;
-          }
         });
 
       } else {
@@ -1932,64 +1768,6 @@
       }
     }
 
-    // ================== REAL-TIME ADMIN ACTIONS ==================
-    // Approves deposit dynamically, adds balance, and updates transaction status
-    function approveDeposit(txId, userUid, amount) {
-      if (!txId || !userUid) return;
-
-      const updates = {};
-      updates[`deposits/${txId}/status`] = 'Approved';
-      updates[`users/${userUid}/deposits/${txId}/status`] = 'Approved';
-
-      db.ref().update(updates).then(() => {
-        // Safe database transaction to increase corresponding user's balance
-        db.ref(`users/${userUid}/balance`).transaction((currentBalance) => {
-          return (currentBalance || 0) + amount;
-        }, (err, committed) => {
-          if (committed) {
-            showToast(`Deposit approved: ৳${amount.toFixed(2)} added to user balance.`);
-          }
-        });
-      }).catch(e => {
-        showToast("Error approving deposit: " + e.message);
-      });
-    }
-
-    // Rejects deposit request
-    function rejectDeposit(txId, userUid) {
-      if (!txId || !userUid) return;
-
-      const updates = {};
-      updates[`deposits/${txId}/status`] = 'Rejected';
-      updates[`users/${userUid}/deposits/${txId}/status`] = 'Rejected';
-
-      db.ref().update(updates).then(() => {
-        showToast(`Deposit ${txId} has been rejected.`);
-      }).catch(e => {
-        showToast("Error rejecting deposit: " + e.message);
-      });
-    }
-
-    // Updates SMM Panel Order statuses (Completed, Processing, Canceled)
-    function updateOrderStatus(orderId, userUid, newStatus) {
-      if (!orderId || !userUid) return;
-
-      const updates = {};
-      updates[`orders/${orderId}/status`] = newStatus;
-      updates[`users/${userUid}/orders_log/${orderId}/status`] = newStatus;
-
-      db.ref().update(updates).then(() => {
-        if (newStatus === 'Completed' || newStatus === 'Canceled') {
-          db.ref(`users/${userUid}/pendingCount`).transaction((currentPending) => {
-            return Math.max(0, (currentPending || 1) - 1);
-          });
-        }
-        showToast(`Order #${orderId} status changed to ${newStatus}!`);
-      }).catch(e => {
-        showToast("Error updating order status: " + e.message);
-      });
-    }
-
     function showToast(message) {
       const container = document.getElementById('toast-container');
       const toast = document.createElement('div');
@@ -2026,6 +1804,7 @@
       sidebar.classList.toggle('-translate-x-full');
     }
 
+    // SEARCH & CATEGORIES FILTERS
     function handleSearch() {
       const query = document.getElementById('service-search').value.toLowerCase();
       const filtered = services.filter(s => s.name.toLowerCase().includes(query));
@@ -2054,6 +1833,23 @@
       navigator.clipboard.writeText(num).then(() => {
         showToast(`Number ${num} copied successfully!`);
       });
+    }
+
+    function copyApiKey() {
+      const text = document.getElementById('api-key-text').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('API Key copied to clipboard!');
+      });
+    }
+
+    function regenerateApiKey() {
+      const chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+      let key = '';
+      for (let i = 0; i < 28; i++) {
+        key += chars[Math.floor(Math.random() * chars.length)];
+      }
+      document.getElementById('api-key-text').innerText = key;
+      showToast('New API Key generated successfully!');
     }
 
     // INITIALIZATION ON WINDOW LOAD
